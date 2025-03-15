@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PopUp } from "../PopUp/PopUp";
 import styles from "./main.module.scss";
-import { ModalContent } from "../modalContent/ModalContent";
+import { ModalContent } from "../ModalContent/ModalContent";
 
 export const Main = () => {
   const [active, setActive] = useState<boolean>(false);
