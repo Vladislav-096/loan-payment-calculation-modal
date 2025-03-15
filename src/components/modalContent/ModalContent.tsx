@@ -62,7 +62,7 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div>
+        <div className={styles["input-wrapper"]}>
           <label className={styles.label}>Ваша сумма кредита</label>
           <div className={styles.wrapper}>
             <input
@@ -80,7 +80,7 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
           </div>
         </div>
         <button className={styles.submit} type="submit">
-          Расчитать
+          Рассчитать
         </button>
       </form>
       <div className={styles.close} onClick={handleClose}>

@@ -1,6 +1,6 @@
 .month-count {
   display: flex;
-  margin-bottom: 22px;
+  margin-bottom: 25px;
   align-items: center;
 
   .month-count-heading {
@@ -18,7 +18,7 @@
     transition: background-color 0.2s, color 0.2s;
 
     &:not(:last-child) {
-      margin-right: 22px;
+      margin-right: 9px;
     }
 
     &.chosen {
@@ -37,10 +37,10 @@
 }
 
 .format-wrapper {
-  margin-bottom: 22px;
+  margin-bottom: 30px;
 
   .payment {
-    margin-bottom: 11px;
+    margin-bottom: 15px;
     color: #000;
     font-size: 14px;
   }
@@ -49,12 +49,19 @@
     display: flex;
 
     .option {
-      padding: 6px 12px;
       background-color: #eef0f2;
       border-radius: 50px;
       color: #000;
       font-size: 14px;
       transition: background-color 0.2s, color 0.2s;
+
+      &:first-child {
+        padding: 10px 16px;
+      }
+
+      &:nth-child(2) {
+        padding: 10px 12px;
+      }
 
       &:not(:last-child) {
         margin-right: 6px;
@@ -77,7 +84,7 @@
 }
 
 .result {
-  margin-bottom: 80px;
+  margin-bottom: 48px;
   color: #000;
   font-size: 24px;
   font-weight: 400;
@@ -85,7 +92,7 @@
 
 .add {
   background-color: #ff5e56;
-  padding: 16px;
+  padding: 18px;
   width: 100%;
   border-radius: 6px;
   transition: background-color 0.2s;
