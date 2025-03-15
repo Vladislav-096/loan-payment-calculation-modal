@@ -1,0 +1,43 @@
+@use "../../styles/_variables.scss" as *;
+
+.content {
+  position: relative;
+  padding: 15px;
+  background-color: #fff;
+  width: 420px;
+  border-radius: 24px;
+  transform: scale(0.5);
+  transition: transform 0.2s;
+  background-color: #ffffff;
+
+  &.active {
+    transform: scale(1);
+  }
+
+  .close {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+
+    .lines {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 3px;
+      border-radius: 35%;
+      background-color: #ea0029;
+    }
+
+    .top {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .bottom {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+}

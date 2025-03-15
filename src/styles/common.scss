@@ -22,7 +22,7 @@ img {
 body {
   min-width: 320px;
   font-family: "Lab Grotesque", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   color: $primaryColor;
 }
 
@@ -31,6 +31,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
+  background-color: $red;
 }
 
 /* glob */
@@ -57,7 +58,7 @@ p {
   list-style: none;
 }
 
-.btn-reset {
+button {
   padding: 0;
   border: none;
   background-color: transparent;
