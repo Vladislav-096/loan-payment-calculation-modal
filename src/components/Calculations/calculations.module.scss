@@ -1,4 +1,99 @@
-.months {
-  margin-right: 22px;
-  background-color: #eef0f2;
+.month-count {
+  display: flex;
+  margin-bottom: 22px;
+  align-items: center;
+
+  .month-count-heading {
+    margin-right: 38px;
+    color: #000;
+    font-size: 14px;
+  }
+
+  .month {
+    padding: 10px 12px;
+    border-radius: 50px;
+    background-color: #eef0f2;
+    font-size: 14px;
+    font-weight: 400;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:not(:last-child) {
+      margin-right: 22px;
+    }
+
+    &.chosen {
+      color: #fff;
+      background-color: #ff5e56;
+
+      &:hover {
+        background-color: #ff5e56;
+      }
+    }
+
+    &:hover {
+      background-color: #dfe3e6;
+    }
+  }
+}
+
+.format-wrapper {
+  margin-bottom: 22px;
+
+  .payment {
+    margin-bottom: 11px;
+    color: #000;
+    font-size: 14px;
+  }
+
+  .formats {
+    display: flex;
+
+    .option {
+      padding: 6px 12px;
+      background-color: #eef0f2;
+      border-radius: 50px;
+      color: #000;
+      font-size: 14px;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:not(:last-child) {
+        margin-right: 6px;
+      }
+
+      &.chosen {
+        color: #fff;
+        background-color: #ff5e56;
+
+        &:hover {
+          background-color: #ff5e56;
+        }
+      }
+
+      &:hover {
+        background-color: #dfe3e6;
+      }
+    }
+  }
+}
+
+.result {
+  margin-bottom: 80px;
+  color: #000;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.add {
+  background-color: #ff5e56;
+  padding: 16px;
+  width: 100%;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #ea0029;
+  }
 }

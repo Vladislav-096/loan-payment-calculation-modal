@@ -2,9 +2,9 @@
 
 .content {
   position: relative;
-  padding: 16px;
+  padding: 32px;
   background-color: #fff;
-  width: 420px;
+  width: 552px;
   border-radius: 24px;
   transform: scale(0.5);
   transition: transform 0.2s;
@@ -15,14 +15,70 @@
   }
 
   .heading {
+    margin-bottom: 11px;
     color: rgb(0, 0, 0);
-    font-size: 18px;
+    font-size: 28px;
   }
 
-  .descr {
-    font-weight: 400;
-    line-height: 16px;
-    font-size: 12px;
+  .description {
+    margin-bottom: 11px;
+
+    .descr {
+      font-weight: 400;
+      line-height: 24px;
+      font-size: 14px;
+    }
+  }
+
+  .form {
+    margin-bottom: 16px;
+
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: #000;
+      font-size: 14px;
+    }
+
+    .wrapper {
+      margin-bottom: 8px;
+      position: relative;
+
+      .input {
+        padding: 8px 10px;
+        width: 100%;
+        border: 1px solid #dfe3e6;
+        border-radius: 3px;
+
+        &:hover {
+          border-color: #000;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: #dfe3e6;
+        }
+
+        &.error {
+          border: 1px solid red;
+        }
+      }
+
+      .message {
+        position: absolute;
+        bottom: -14px;
+        right: 0;
+        color: #ea0029;
+        font-size: 10px;
+        font-weight: 400;
+      }
+    }
+
+    .submit {
+      color: #ea0029;
+      font-size: 14px;
+      font-weight: 500;
+    }
   }
 
   .close {
@@ -50,9 +106,5 @@
     .bottom {
       transform: translate(-50%, -50%) rotate(-45deg);
     }
-  }
-
-  .error {
-    border: 1px solid red;
   }
 }

@@ -17,11 +17,20 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const { value } = event.target;
+    // setIsEmpty(false);
+
+    // if (/^\d*\.?\d*$/.test(value)) {
+    //   setInputValue(Number(value));
+    // }
     const { value } = event.target;
     setIsEmpty(false);
 
-    if (/^\d*\.?\d*$/.test(value)) {
-      setInputValue(Number(value));
+    const numericValue = value.replace(/\s/g, ""); // Убираем пробелы
+
+    if (/^\d*$/.test(numericValue)) {
+      const numberValue = numericValue ? Number(numericValue) : null;
+      setInputValue(numberValue);
     }
   };
 
@@ -41,22 +50,38 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
       onClick={(e) => e.stopPropagation()}
     >
       <h1 className={styles.heading}>Платежи по кредиту</h1>
-      <p className={styles.descr}>
-        Введите сумму кредита и выберите срок, на который вы хотите его
-        оформить. Мы автоматически рассчитаем для вас ежемесячный платеж, чтобы
-        вы могли лучше спланировать свои финансы.
-      </p>
-      <form onSubmit={handleSubmit}>
+      <div className={styles.description}>
+        <p className={styles.descr}>
+          Введите сумму кредита и выберите срок, на который вы хотите его
+          оформить.
+        </p>
+        <p className={styles.descr}>
+          Мы автоматически рассчитаем для вас ежемесячный платеж, чтобы вы могли
+          лучше спланировать свои финансы.
+        </p>
+      </div>
+
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div>
-          <label>Ваша сумма кредита</label>
-          <input
-            type="text"
-            value={inputValue ? inputValue : ""}
-            onChange={handleChange}
-            className={`${isEmpty ? styles.error : ""}`}
-          />
+          <label className={styles.label}>Ваша сумма кредита</label>
+          <div className={styles.wrapper}>
+            <input
+              type="text"
+              // value={inputValue ? inputValue : ""}
+              value={
+                inputValue !== null ? inputValue.toLocaleString("ru-RU") : ""
+              }
+              onChange={handleChange}
+              className={`${isEmpty ? styles.error : ""} ${styles.input}`}
+            />
+            {isEmpty && (
+              <p className={styles.message}>Поле обязательно для заполнения</p>
+            )}
+          </div>
         </div>
-        <button type="submit">Расчитать</button>
+        <button className={styles.submit} type="submit">
+          Расчитать
+        </button>
       </form>
       <div className={styles.close} onClick={handleClose}>
         <span className={`${styles.lines} ${styles.top}`}></span>

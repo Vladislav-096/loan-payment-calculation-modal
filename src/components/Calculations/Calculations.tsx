@@ -31,6 +31,10 @@ export const Calculations = ({ amount }: Calculations) => {
     setCalculationOption("month");
   };
 
+  const handleAddClick = () => {
+    console.log("добавил");
+  };
+
   useEffect(() => {
     if (amount) {
       let option = 1;
@@ -45,26 +49,56 @@ export const Calculations = ({ amount }: Calculations) => {
   }, [amount, monthDevisor, calculationOption]);
 
   return (
-    <div>
-      <div>
-        <h2>Количество месяцев</h2>
-        {months.map((item, index) => (
+    <>
+      <div className={styles["month-count"]}>
+        <h2 className={styles["month-count-heading"]}>Количество месяцев?</h2>
+        <>
+          {months.map((item, index) => (
+            <button
+              key={index}
+              className={`${styles.month} ${
+                monthDevisor === item ? styles.chosen : ""
+              }`}
+              onClick={() => handleMonthClick({ months: item })}
+            >
+              {item}
+            </button>
+          ))}
+        </>
+      </div>
+      <div className={styles["format-wrapper"]}>
+        <h2 className={styles.payment}>Итого ваш платеж по кредиту:</h2>
+        <div className={styles.formats}>
           <button
-            key={index}
-            className={styles.months}
-            onClick={() => handleMonthClick({ months: item })}
-          > 
-            {item}
+            className={`${styles.option} ${
+              calculationOption === "year" ? styles.chosen : ""
+            }`}
+            onClick={handlePerYearClick}
+          >
+            в год
           </button>
-        ))}
+          <button
+            className={`${styles.option} ${
+              calculationOption === "month" ? styles.chosen : ""
+            }`}
+            onClick={handlePerMonthClick}
+          >
+            в месяц
+          </button>
+        </div>
       </div>
-      <div>
-        <button style={{ marginRight: "15px" }} onClick={handlePerYearClick}>
-          в год
-        </button>
-        <button onClick={handlePerMonthClick}>в месяц</button>
-      </div>
-      <div>{amount && <span>{modifiedAmount}</span>}</div>
-    </div>
+      {modifiedAmount !== null && (
+        <p className={styles.result}>
+          {new Intl.NumberFormat("ru-RU", {
+            minimumFractionDigits: modifiedAmount % 1 !== 0 ? 2 : 0,
+            maximumFractionDigits: 2,
+          }).format(modifiedAmount)}{" "}
+          рублей
+        </p>
+      )}
+      <button className={styles.add} onClick={handleAddClick}>
+        Добавить
+      </button>
+    </>
   );
 };
