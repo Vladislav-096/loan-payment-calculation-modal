@@ -18,4 +18,8 @@
     visibility: visible;
     opacity: 1;
   }
+
+  @media (max-width: 480px) {
+    transition: none;
+  }
 }
