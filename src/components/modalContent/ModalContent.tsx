@@ -20,17 +20,17 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
     // const { value } = event.target;
     // setIsEmpty(false);
 
-    // if (/^\d*\.?\d*$/.test(value)) {
-    //   setInputValue(Number(value));
+    // const numericValue = value.replace(/\s/g, "");
+
+    // if (/^\d*$/.test(numericValue)) {
+    //   const numberValue = numericValue ? Number(numericValue) : null;
+    //   setInputValue(numberValue);
     // }
     const { value } = event.target;
     setIsEmpty(false);
 
-    const numericValue = value.replace(/\s/g, ""); // Убираем пробелы
-
-    if (/^\d*$/.test(numericValue)) {
-      const numberValue = numericValue ? Number(numericValue) : null;
-      setInputValue(numberValue);
+    if (/^\d*\.?\d*$/.test(value)) {
+      setInputValue(Number(value));
     }
   };
 
@@ -67,13 +67,16 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
           <div className={styles.wrapper}>
             <input
               type="text"
-              // value={inputValue ? inputValue : ""}
-              value={
-                inputValue !== null ? inputValue.toLocaleString("ru-RU") : ""
-              }
+              // value={
+              //   inputValue !== null ? inputValue.toLocaleString("ru-RU") : ""
+              // }
+              value={inputValue ? inputValue : ""}
               onChange={handleChange}
               className={`${isEmpty ? styles.error : ""} ${styles.input}`}
             />
+            {!inputValue && (
+              <span className={styles.placeholder}>Введите данные</span>
+            )}
             {isEmpty && (
               <p className={styles.message}>Поле обязательно для заполнения</p>
             )}

@@ -50,9 +50,12 @@ export const Calculations = ({ amount }: Calculations) => {
 
   return (
     <>
-      <div className={styles["month-count"]}>
+      <div
+        style={modifiedAmount !== null ? {} : { marginBottom: "50px" }}
+        className={styles["month-count"]}
+      >
         <h2 className={styles["month-count-heading"]}>Количество месяцев?</h2>
-        <>
+        <div>
           {months.map((item, index) => (
             <button
               key={index}
@@ -64,37 +67,38 @@ export const Calculations = ({ amount }: Calculations) => {
               {item}
             </button>
           ))}
-        </>
-      </div>
-      <div className={styles["format-wrapper"]}>
-        <h2 className={styles.payment}>Итого ваш платеж по кредиту:</h2>
-        <div className={styles.formats}>
-          <button
-            className={`${styles.option} ${
-              calculationOption === "year" ? styles.chosen : ""
-            }`}
-            onClick={handlePerYearClick}
-          >
-            в год
-          </button>
-          <button
-            className={`${styles.option} ${
-              calculationOption === "month" ? styles.chosen : ""
-            }`}
-            onClick={handlePerMonthClick}
-          >
-            в месяц
-          </button>
         </div>
       </div>
+
       {modifiedAmount !== null && (
-        <p className={styles.result}>
-          {new Intl.NumberFormat("ru-RU", {
-            minimumFractionDigits: modifiedAmount % 1 !== 0 ? 2 : 0,
-            maximumFractionDigits: 2,
-          }).format(modifiedAmount)}{" "}
-          рублей
-        </p>
+        <div className={styles["format-wrapper"]}>
+          <h2 className={styles.payment}>Итого ваш платеж по кредиту:</h2>
+          <div className={styles.formats}>
+            <button
+              className={`${styles.option} ${
+                calculationOption === "year" ? styles.chosen : ""
+              }`}
+              onClick={handlePerYearClick}
+            >
+              в год
+            </button>
+            <button
+              className={`${styles.option} ${
+                calculationOption === "month" ? styles.chosen : ""
+              }`}
+              onClick={handlePerMonthClick}
+            >
+              в месяц
+            </button>
+          </div>
+          <p className={styles.result}>
+            {new Intl.NumberFormat("ru-RU", {
+              minimumFractionDigits: modifiedAmount % 1 !== 0 ? 2 : 0,
+              maximumFractionDigits: 2,
+            }).format(modifiedAmount)}{" "}
+            рублей
+          </p>
+        </div>
       )}
       <button className={styles.add} onClick={handleAddClick}>
         Добавить
