@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./calculations.module.scss";
 
 interface Calculations {
-  amount: number | null;
+  amount: number;
 }
 
 interface months {

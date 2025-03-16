@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./modalContent.module.scss";
 import { Calculations } from "../Calculations/Calculations";
+import { useCurrencyHelpers } from "../../hooks/useCurrencyHelpers";
 
 interface ModalContent {
   active: boolean;
@@ -8,29 +9,34 @@ interface ModalContent {
 }
 
 export const ModalContent = ({ active, setActive }: ModalContent) => {
-  const [inputValue, setInputValue] = useState<number | null>(null);
-  const [amount, setAmount] = useState<number | null>(null);
+  const locale = "ru-RU";
+  const maximumFractionDigits = 2;
+  const currency = "RUB";
+
+  const [amount, setAmount] = useState<string>("");
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const {
+    parseToCleanString,
+    format,
+    sanitizeInput,
+    parseToNumberBeforeSubmit,
+  } = useCurrencyHelpers({ locale, maximumFractionDigits, currency });
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleClose = () => {
     setActive(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // const { value } = event.target;
-    // setIsEmpty(false);
-
-    // const numericValue = value.replace(/\s/g, "");
-
-    // if (/^\d*$/.test(numericValue)) {
-    //   const numberValue = numericValue ? Number(numericValue) : null;
-    //   setInputValue(numberValue);
-    // }
-    const { value } = event.target;
     setIsEmpty(false);
+    setInputValue(sanitizeInput(event.target.value));
+  };
 
-    if (/^\d*\.?\d*$/.test(value)) {
-      setInputValue(Number(value));
+  const handleOnBlur = () => {
+    if (inputValue) {
+      setInputValue(format(inputValue));
+    } else {
+      setInputValue("");
     }
   };
 
@@ -66,12 +72,10 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
           <label className={styles.label}>Ваша сумма кредита</label>
           <div className={styles.wrapper}>
             <input
-              type="text"
-              // value={
-              //   inputValue !== null ? inputValue.toLocaleString("ru-RU") : ""
-              // }
-              value={inputValue ? inputValue : ""}
+              value={inputValue}
               onChange={handleChange}
+              onFocus={() => setInputValue(parseToCleanString(inputValue))}
+              onBlur={handleOnBlur}
               className={`${isEmpty ? styles.error : ""} ${styles.input}`}
             />
             {!inputValue && (
@@ -90,7 +94,7 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
         <span className={`${styles.lines} ${styles.top}`}></span>
         <span className={`${styles.lines} ${styles.bottom}`}></span>
       </div>
-      <Calculations amount={amount} />
+      <Calculations amount={parseToNumberBeforeSubmit(amount)} />
     </div>
   );
 };
