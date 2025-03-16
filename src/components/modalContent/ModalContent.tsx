@@ -8,11 +8,11 @@ interface ModalContent {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ModalContent = ({ active, setActive }: ModalContent) => {
-  const locale = "ru-RU";
-  const maximumFractionDigits = 2;
-  const currency = "RUB";
+const LOCALE = "ru-RU";
+const MAXIMUM_FRACTION_DIGITS = 2;
+const CURRENCY = "RUB";
 
+export const ModalContent = ({ active, setActive }: ModalContent) => {
   const [amount, setAmount] = useState<string>("");
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const {
@@ -20,7 +20,11 @@ export const ModalContent = ({ active, setActive }: ModalContent) => {
     format,
     sanitizeInput,
     parseToNumberBeforeSubmit,
-  } = useCurrencyHelpers({ locale, maximumFractionDigits, currency });
+  } = useCurrencyHelpers({
+    locale: LOCALE,
+    maximumFractionDigits: MAXIMUM_FRACTION_DIGITS,
+    currency: CURRENCY,
+  });
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleClose = () => {

@@ -5,13 +5,13 @@ interface Calculations {
   amount: number;
 }
 
-interface months {
+interface Months {
   months: number;
 }
 
 type calculationOption = "month" | "year";
 
-const months: number[] = [12, 24, 36, 48];
+const MONTHS: number[] = [12, 24, 36, 48];
 
 export const Calculations = ({ amount }: Calculations) => {
   const [monthDevisor, setMonthDevisor] = useState<number>(12);
@@ -19,7 +19,7 @@ export const Calculations = ({ amount }: Calculations) => {
     useState<calculationOption>("month");
   const [modifiedAmount, setModifiedAmount] = useState<null | number>(null);
 
-  const handleMonthClick = ({ months }: months) => {
+  const handleMonthClick = ({ months }: Months) => {
     setMonthDevisor(months);
   };
 
@@ -37,14 +37,9 @@ export const Calculations = ({ amount }: Calculations) => {
 
   useEffect(() => {
     if (amount) {
-      let option = 1;
-
-      if (calculationOption === "year") {
-        option = 12;
-      }
-
-      const newAmount = amount / (monthDevisor / option);
-      setModifiedAmount(newAmount);
+      const divisor =
+        calculationOption === "year" ? monthDevisor / 12 : monthDevisor;
+      setModifiedAmount(amount / divisor);
     }
   }, [amount, monthDevisor, calculationOption]);
 
@@ -56,7 +51,7 @@ export const Calculations = ({ amount }: Calculations) => {
       >
         <h2 className={styles["month-count-heading"]}>Количество месяцев?</h2>
         <div>
-          {months.map((item, index) => (
+          {MONTHS.map((item, index) => (
             <button
               key={index}
               className={`${styles.month} ${

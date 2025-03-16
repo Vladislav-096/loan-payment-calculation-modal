@@ -5,9 +5,9 @@ interface CurrencyHelpersProps {
 }
 
 export const useCurrencyHelpers = ({
-  locale = "bg-BG",
-  maximumFractionDigits = 2,
-  currency = "EUR",
+  locale,
+  maximumFractionDigits,
+  currency,
 }: CurrencyHelpersProps = {}) => {
   const formatter = new Intl.NumberFormat(locale, {
     style: "currency",
